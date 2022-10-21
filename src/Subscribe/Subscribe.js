@@ -1,9 +1,9 @@
 import axios from "axios";
-import Body from "../assets/constants/Body";
+import Body from "../assets/style/Body";
 import LogoImage from "../assets/constants/Logo";
-import Forms from "../assets/constants/Form";
-import Entry from "../assets/constants/Entry";
-import Subscribe from "../assets/constants/Subscribe";
+import Forms from "../assets/style/Form";
+import Entry from "../assets/style/Entry";
+import Subscribe from "../assets/style/Subscribe";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import waiting from "../assets/images/waiting.gif";
@@ -16,7 +16,6 @@ export default function SubscribePlace() {
   let [loading, setLoading] = useState(false);
   let navigate = useNavigate();
 
-  console.log(name);
   let object = {};
 
   function click() {
@@ -35,13 +34,14 @@ export default function SubscribePlace() {
   }
 
   function error(e) {
-    let errorMessage = e.response.data.message;
-    if (errorMessage != "") {
+    let errorMessage = e.response;
+    console.log(errorMessage, e.response);
+    if (errorMessage.message != "") {
       if (errorMessage.status === 422) {
         alert("Sua Imagem ou Email está em formato inválido");
       }
       if (errorMessage.status === 409) {
-        console.log("Usuário ou Email já cadastrado");
+        alert("Usuário ou Email já cadastrado");
       }
       setLoading(false);
     }

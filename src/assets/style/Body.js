@@ -10,4 +10,4 @@ const Body = styled.div`
   flex-direction: column;
 `;
 
-export default Body
+export default Body;
