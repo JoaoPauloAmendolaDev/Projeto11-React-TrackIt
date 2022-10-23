@@ -1,13 +1,10 @@
 import axios from "axios";
-import Body from "../assets/style/Body";
+import { Body, Entry, Form, Input } from "./SubscribeStyle";
 import LogoImage from "../assets/constants/Logo";
-//import Forms from "../assets/style/Form";
-import Entry from "../assets/style/Entry";
 import Subscribe from "../assets/style/Subscribe";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import waiting from "../assets/images/waiting.gif";
-import styled from "styled-components";
 
 export default function SubscribePlace() {
   let [photo, setPhoto] = useState("");
@@ -71,6 +68,7 @@ export default function SubscribePlace() {
       <Form>
         <Input
           avaible={loading ? "#F2F2F2" : "#fff"}
+          data-identifier="input-email"
           placeholder="Email"
           type="email"
           disabled={loading}
@@ -78,6 +76,7 @@ export default function SubscribePlace() {
         />
         <Input
           avaible={loading ? "#F2F2F2" : "#fff"}
+          data-identifier="input-password"
           placeholder="Senha"
           type="password"
           disabled={loading}
@@ -85,6 +84,7 @@ export default function SubscribePlace() {
         />
         <Input
           avaible={loading ? "#F2F2F2" : "#fff"}
+          data-identifier="input-name"
           placeholder="Nome"
           type="text"
           disabled={loading}
@@ -92,50 +92,23 @@ export default function SubscribePlace() {
         />
         <Input
           avaible={loading ? "#F2F2F2" : "#fff"}
+          data-identifier="back-to-login-action"
           placeholder="Foto"
           type="url"
           disabled={loading}
           onChange={(e) => setPhoto(e.target.value)}
         />
       </Form>
-      <Entry onClick={() => test()}>
+      <Entry color={loading ? "#52B6FF70" : "#52B6FF"} onClick={() => test()}>
         {loading ? <img src={waiting} /> : <p>Cadastrar</p>}
       </Entry>
       <Link to={"/"}>
         <Subscribe>
-          <a>Já tem uma conta? Faça login!</a>
+          <a data-identifier="back-to-login-action">
+            Já tem uma conta? Faça login!
+          </a>
         </Subscribe>
       </Link>
     </Body>
   );
 }
-
-const Input = styled.input`
-  width: 303px;
-  height: 45px;
-  margin-top: 5px;
-  border-radius: 5px;
-  background-color: ${(props) => props.avaible};
-  border-width: 1px;
-  border-color: #13111121;
-  ::placeholder {
-    color: #333333;
-  }
-`;
-
-const Form = styled.div`
-  display: flex;
-  flex-direction: column;
-  input {
-    width: 303px;
-    height: 45px;
-    margin-top: 5px;
-    border-radius: 5px;
-    background-color: ${(props) => props.avaible};
-    border-width: 1px;
-    border-color: #13111121;
-    ::placeholder {
-      color: #333333;
-    }
-  }
-`;

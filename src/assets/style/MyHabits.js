@@ -6,7 +6,7 @@ export const ButtomSave = styled.div`
   justify-content: center;
   width: 84px;
   height: 35px;
-  background-color: #52b6ff;
+  background-color: ${(props) => props.color};
   position: absolute;
   margin-top: 32px;
   right: 40px;
@@ -14,6 +14,7 @@ export const ButtomSave = styled.div`
   border-radius: 5px;
   color: #ffffff;
   font-family: "Lexend Deca";
+  cursor: pointer;
 `;
 
 export const Week = styled.div`
@@ -51,7 +52,7 @@ export const CreateHabits = styled.div`
   height: 85px;
   display: flex;
   align-items: center;
-  
+
   p {
     font-family: "Lexend Deca";
     font-weight: 400;
@@ -69,6 +70,7 @@ export const CreateHabits = styled.div`
     height: 35px;
     background-color: #52b6ff;
     margin-left: 130px;
+    cursor: pointer;
     :hover {
       cursor: pointer;
     }
@@ -84,9 +86,9 @@ export const CreateHabit = styled.div`
   align-items: center;
   padding-top: 18px;
   margin-bottom: 30px;
-  
-  
+
   input {
+    background-color: ${(props) => props.color} !important;
     border-radius: 5px;
     border-color: #b1c3bf30;
     width: 303px;
@@ -102,8 +104,8 @@ export const CreateHabit = styled.div`
 `;
 
 export const Body = styled.div`
-  background-color: #E5E5E5;
-`
+  background-color: #e5e5e5;
+`;
 
 export const Day = styled.div`
   border-width: 1px;
@@ -117,9 +119,7 @@ export const Day = styled.div`
   height: 30px;
   background-color: white;
   color: #ccd8d5;
-  :hover {
-    cursor: pointer;
-  }
+  cursor: pointer;
 `;
 
 export const DaySelected = styled.div`

@@ -13,7 +13,7 @@ import {
   DaySelected,
   Body,
 } from "../style/MyHabits";
-let inputValue
+let inputValue;
 
 function MyHabits() {
   const { object, setObject } = useContext(AuthContext);
@@ -27,6 +27,7 @@ function MyHabits() {
   let [isCreating, setIsCreating] = useState(false);
   let [input, setInput] = useState();
   let [clickedDays, setClickedDays] = useState([]);
+  let [loading, setLoading] = useState(false);
   let days = ["D", "S", "T", "Q", "Q", "S", "S"];
 
   const { globalHabits, setGlobalHabits } = useContext(MyHabitsContext);
@@ -38,24 +39,29 @@ function MyHabits() {
 
   function inputFunction(e) {
     setInput(e);
-    inputValue = e
+    inputValue = e;
     console.log(e);
   }
 
   function clickSave() {
+    setLoading(true);
     console.log("entrei");
     if (clickedDays.length === 0) {
-      return alert("Selecione os dias que deseja para o hábito");
+      setLoading(true);
+      alert("Selecione os dias que deseja para o hábito");
+      return setLoading(false);
     }
     if (input === "") {
-      return alert("Digite o hábito que deseja");
+      setLoading(true);
+      alert("Digite o hábito que deseja");
+      return setLoading(false);
     }
     let habitPost = {
       name: input,
       days: clickedDays,
     };
 
-    inputValue = ''
+    inputValue = "";
 
     axios
       .post(
@@ -63,11 +69,15 @@ function MyHabits() {
         habitPost,
         config
       )
-      .then((e) => console.log(e.request.statusText))
-      .catch((e) => console.log(e.data));
+      .then((e) => load(e.request.statusText))
+      .catch((e) => load(e.data));
     console.log(globalHabits);
     setGlobalHabits([habitPost]);
     setClickedDays([]);
+  }
+
+  function load() {
+    setLoading(false);
   }
 
   function dayClicked(index) {
@@ -83,12 +93,15 @@ function MyHabits() {
     <Body>
       <CreateHabits>
         <p>Meus Hábitos</p>
-        <div onClick={() => createHabit()}>+</div>
+        <div data-identifier="create-habit-btn" onClick={() => createHabit()}>
+          +
+        </div>
       </CreateHabits>
       <PersonalHabits>
         {isCreating ? (
-          <CreateHabit>
+          <CreateHabit color={loading ? "#D4D4D4" : "#fff"}>
             <input
+              data-identifier="input-habit-name"
               type={"text"}
               placeholder="nome do hábito"
               value={inputValue}
@@ -98,19 +111,36 @@ function MyHabits() {
               <Days>
                 {days.map((value, index) =>
                   clickedDays.includes(index) ? (
-                    <DaySelected onClick={() => dayClicked(index)}>
+                    <DaySelected
+                      data-identifier="week-day-btn"
+                      onClick={() => dayClicked(index)}
+                    >
                       {value}
                     </DaySelected>
                   ) : (
-                    <Day key={index} onClick={() => dayClicked(index)}>
+                    <Day
+                      data-identifier="week-day-btn"
+                      key={index}
+                      onClick={() => dayClicked(index)}
+                    >
                       {value}
                     </Day>
                   )
                 )}
               </Days>
-              <p onClick={() => setIsCreating(false)}>Cancelar</p>
+              <p
+                data-identifier="cancel-habit-create-btn"
+                onClick={() => setIsCreating(false)}
+              >
+                Cancelar
+              </p>
               <div onClick={() => clickSave()}>
-                <ButtomSave>Salvar</ButtomSave>
+                <ButtomSave
+                  data-identifier="save-habit-create-btn"
+                  color={loading ? "#52b6ff70" : "#52b6ff"}
+                >
+                  Salvar
+                </ButtomSave>
               </div>
             </Week>
           </CreateHabit>

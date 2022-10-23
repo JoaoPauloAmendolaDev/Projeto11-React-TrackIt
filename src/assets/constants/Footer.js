@@ -10,15 +10,25 @@ export default function Footer() {
     if (text === "today") {
       return navigate("/hoje");
     }
+    if (text === "historic") {
+      return navigate("/historico");
+    }
   }
 
   return (
     <Bottom>
-      <p onClick={() => goTo("habits")}>Hábitos</p>
-      <button onClick={() => goTo("today")}>
+      <p data-identifier="habit-page-action" onClick={() => goTo("habits")}>
+        Hábitos
+      </p>
+      <span onClick={() => goTo("today")}>
         <p>Hoje</p>
-      </button>
-      <p>Histórico</p>
+      </span>
+      <p
+        data-identifier="historic-page-action"
+        onClick={() => goTo("historic")}
+      >
+        Histórico
+      </p>
     </Bottom>
   );
 }
@@ -37,12 +47,12 @@ const Bottom = styled.div`
   background-color: #fff;
   z-index: 2;
 
-  p {
+  > p {
     color: #52b6ff;
     font-family: "Lexend Deca";
     font-weight: 400;
   }
-  button {
+  span {
     position: absolute;
     font-family: "Lexend Deca";
     height: 95px;
@@ -51,6 +61,9 @@ const Bottom = styled.div`
     background-color: #52b6ff;
     left: 135px;
     bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     p {
       color: #ffffff;
       font-family: "Lexend Deca";

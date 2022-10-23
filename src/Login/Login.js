@@ -6,7 +6,7 @@ import Entry from "../assets/style/Entry";
 import Subscribe from "../assets/style/Subscribe";
 import { useState, useContext } from "react";
 import { AuthContext } from "../contexts/auth";
-import styled from "styled-components";
+import { Form, Input } from "./LoginStyle";
 
 export default function Login() {
   let [email, setEmail] = useState();
@@ -60,6 +60,7 @@ export default function Login() {
       <LogoImage />
       <Form>
         <Input
+          data-identifier="input-email"
           avaible={loading ? "#F2F2F2" : "#fff"}
           placeholder="Email"
           disabled={loading}
@@ -67,6 +68,7 @@ export default function Login() {
           onChange={(e) => setEmail(e.target.value)}
         />
         <Input
+          data-identifier="input-password"
           avaible={loading ? "#F2F2F2" : "#fff"}
           placeholder="Senha"
           disabled={loading}
@@ -75,34 +77,17 @@ export default function Login() {
         />
       </Form>
       <Entry
+        data-identifier="login-btn"
         avaible={loading ? "#52B6FF70" : "#52B6FF"}
         onClick={() => login()}
       >
         <p>Entrar </p>
       </Entry>
       <Link to={"/cadastro"}>
-        <Subscribe>
+        <Subscribe data-identifier="sign-up-action">
           <a>Não tem conta? Cadastre-se!</a>
         </Subscribe>
       </Link>
     </Body>
   );
 }
-
-const Input = styled.input`
-  width: 303px;
-  height: 45px;
-  margin-top: 5px;
-  border-radius: 5px;
-  background-color: ${(props) => props.avaible};
-  border-width: 1px;
-  border-color: #13111121;
-  ::placeholder {
-    color: #333333;
-  }
-`;
-
-const Form = styled.div`
-  display: flex;
-  flex-direction: column;
-`;

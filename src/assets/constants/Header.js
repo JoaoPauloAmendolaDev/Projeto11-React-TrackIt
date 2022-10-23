@@ -8,7 +8,7 @@ export default function Top() {
     <Header>
       <p>TrackIt</p>
       <div>
-        <img src={object.image} />
+        <img data-identifier="avatar" src={object.image} />
       </div>
     </Header>
   );

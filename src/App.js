@@ -7,6 +7,7 @@ import Subscribe from "./Subscribe/Subscribe";
 import AuthProvider from "./contexts/auth";
 import MyHabitsProvider from "./contexts/MyHabits";
 import Today from "./Today/Today";
+import Historic from "./Historic/Historic";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
               <Route path="/cadastro" element={<Subscribe />} />
               <Route path="/habitos" element={<Habits />} />
               <Route path="/hoje" element={<Today />} />
+              <Route path="/historico" element={<Historic />} />
             </Routes>
           </MyHabitsProvider>
         </AuthProvider>
