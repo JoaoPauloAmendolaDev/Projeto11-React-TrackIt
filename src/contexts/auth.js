@@ -5,7 +5,6 @@ export const AuthContext = createContext({});
 
 function AuthProvider({ children }) {
   const [object, setObject] = useState();
-  const navigation = useNavigate();
 
   return (
     <AuthContext.Provider value={{ object, setObject }}>

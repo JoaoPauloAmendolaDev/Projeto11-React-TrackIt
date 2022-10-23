@@ -1,12 +1,13 @@
 import axios from "axios";
 import Body from "../assets/style/Body";
 import LogoImage from "../assets/constants/Logo";
-import Forms from "../assets/style/Form";
+//import Forms from "../assets/style/Form";
 import Entry from "../assets/style/Entry";
 import Subscribe from "../assets/style/Subscribe";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import waiting from "../assets/images/waiting.gif";
+import styled from "styled-components";
 
 export default function SubscribePlace() {
   let [photo, setPhoto] = useState("");
@@ -67,32 +68,36 @@ export default function SubscribePlace() {
   return (
     <Body>
       <LogoImage />
-      <Forms>
-        <input
+      <Form>
+        <Input
+          avaible={loading ? "#F2F2F2" : "#fff"}
           placeholder="Email"
           type="email"
           disabled={loading}
           onChange={(e) => setEmail(e.target.value)}
         />
-        <input
+        <Input
+          avaible={loading ? "#F2F2F2" : "#fff"}
           placeholder="Senha"
           type="password"
           disabled={loading}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <input
+        <Input
+          avaible={loading ? "#F2F2F2" : "#fff"}
           placeholder="Nome"
           type="text"
           disabled={loading}
           onChange={(e) => setName(e.target.value)}
         />
-        <input
+        <Input
+          avaible={loading ? "#F2F2F2" : "#fff"}
           placeholder="Foto"
           type="url"
           disabled={loading}
           onChange={(e) => setPhoto(e.target.value)}
         />
-      </Forms>
+      </Form>
       <Entry onClick={() => test()}>
         {loading ? <img src={waiting} /> : <p>Cadastrar</p>}
       </Entry>
@@ -104,3 +109,33 @@ export default function SubscribePlace() {
     </Body>
   );
 }
+
+const Input = styled.input`
+  width: 303px;
+  height: 45px;
+  margin-top: 5px;
+  border-radius: 5px;
+  background-color: ${(props) => props.avaible};
+  border-width: 1px;
+  border-color: #13111121;
+  ::placeholder {
+    color: #333333;
+  }
+`;
+
+const Form = styled.div`
+  display: flex;
+  flex-direction: column;
+  input {
+    width: 303px;
+    height: 45px;
+    margin-top: 5px;
+    border-radius: 5px;
+    background-color: ${(props) => props.avaible};
+    border-width: 1px;
+    border-color: #13111121;
+    ::placeholder {
+      color: #333333;
+    }
+  }
+`;

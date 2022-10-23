@@ -4,7 +4,6 @@ import { AuthContext } from "../../contexts/auth";
 
 export default function Top() {
   const { object, setObject } = useContext(AuthContext);
-  console.log(object);
   return (
     <Header>
       <p>TrackIt</p>

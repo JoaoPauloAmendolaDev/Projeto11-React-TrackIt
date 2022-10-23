@@ -1,10 +1,21 @@
+import { Navigate, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 export default function Footer() {
+  const navigate = useNavigate();
+  function goTo(text) {
+    if (text === "habits") {
+      return navigate("/habitos");
+    }
+    if (text === "today") {
+      return navigate("/hoje");
+    }
+  }
+
   return (
     <Bottom>
-      <p>Hábitos</p>
-      <button>
+      <p onClick={() => goTo("habits")}>Hábitos</p>
+      <button onClick={() => goTo("today")}>
         <p>Hoje</p>
       </button>
       <p>Histórico</p>
@@ -23,7 +34,8 @@ const Bottom = styled.div`
   position: fixed;
   left: 0;
   bottom: 0;
-  background-color: black;
+  background-color: #fff;
+  z-index: 2;
 
   p {
     color: #52b6ff;

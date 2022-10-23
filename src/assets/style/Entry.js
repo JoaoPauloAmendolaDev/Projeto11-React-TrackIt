@@ -6,7 +6,7 @@ const Entry = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #52b6ff;
+  background-color: ${(props) => props.avaible};
   border-radius: 5px;
   margin-top: 35px;
   p {

@@ -1,5 +1,4 @@
-import { createContext, useContext, useState } from "react";
-import styled from "styled-components";
+import { useContext, useState } from "react";
 import { MyHabitsContext } from "../../contexts/MyHabits";
 import { AuthContext } from "../../contexts/auth";
 import axios from "axios";
@@ -12,7 +11,9 @@ import {
   CreateHabits,
   Day,
   DaySelected,
+  Body,
 } from "../style/MyHabits";
+let inputValue
 
 function MyHabits() {
   const { object, setObject } = useContext(AuthContext);
@@ -28,11 +29,17 @@ function MyHabits() {
   let [clickedDays, setClickedDays] = useState([]);
   let days = ["D", "S", "T", "Q", "Q", "S", "S"];
 
-  const { MyHabits, setMyHabits } = useContext(MyHabitsContext);
+  const { globalHabits, setGlobalHabits } = useContext(MyHabitsContext);
 
   function createHabit() {
     setIsCreating(true);
     console.log(isCreating);
+  }
+
+  function inputFunction(e) {
+    setInput(e);
+    inputValue = e
+    console.log(e);
   }
 
   function clickSave() {
@@ -44,18 +51,23 @@ function MyHabits() {
       return alert("Digite o hábito que deseja");
     }
     let habitPost = {
-      name: object.name,
+      name: input,
       days: clickedDays,
     };
-    console.log(habitPost);
+
+    inputValue = ''
+
     axios
       .post(
         "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits",
         habitPost,
         config
       )
-      .then((e) => console.log(e))
+      .then((e) => console.log(e.request.statusText))
       .catch((e) => console.log(e.data));
+    console.log(globalHabits);
+    setGlobalHabits([habitPost]);
+    setClickedDays([]);
   }
 
   function dayClicked(index) {
@@ -67,10 +79,8 @@ function MyHabits() {
     }
   }
 
-  console.log(clickedDays);
-
   return (
-    <>
+    <Body>
       <CreateHabits>
         <p>Meus Hábitos</p>
         <div onClick={() => createHabit()}>+</div>
@@ -81,7 +91,8 @@ function MyHabits() {
             <input
               type={"text"}
               placeholder="nome do hábito"
-              onChange={(e) => setInput(e.target.value)}
+              value={inputValue}
+              onChange={(e) => inputFunction(e.target.value)}
             ></input>
             <Week>
               <Days>
@@ -97,7 +108,7 @@ function MyHabits() {
                   )
                 )}
               </Days>
-              <p>Cancelar</p>
+              <p onClick={() => setIsCreating(false)}>Cancelar</p>
               <div onClick={() => clickSave()}>
                 <ButtomSave>Salvar</ButtomSave>
               </div>
@@ -105,7 +116,7 @@ function MyHabits() {
           </CreateHabit>
         ) : undefined}
       </PersonalHabits>
-    </>
+    </Body>
   );
 }
 

@@ -32,7 +32,9 @@ export const Week = styled.div`
 `;
 
 export const PersonalHabits = styled.div`
-  background-color: #ffffff;
+  width: 340px;
+  margin: auto auto;
+  background-color: #fff !important;
   border-radius: 5px;
 `;
 
@@ -49,7 +51,7 @@ export const CreateHabits = styled.div`
   height: 85px;
   display: flex;
   align-items: center;
-
+  
   p {
     font-family: "Lexend Deca";
     font-weight: 400;
@@ -80,9 +82,16 @@ export const CreateHabit = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-top: 18px;
+  margin-bottom: 30px;
+  
+  
   input {
+    border-radius: 5px;
+    border-color: #b1c3bf30;
     width: 303px;
     height: 45px;
+    padding-left: 10px;
     ::placeholder {
       font-size: 20px;
       margin-left: 11px;
@@ -91,6 +100,10 @@ export const CreateHabit = styled.div`
     }
   }
 `;
+
+export const Body = styled.div`
+  background-color: #E5E5E5;
+`
 
 export const Day = styled.div`
   border-width: 1px;

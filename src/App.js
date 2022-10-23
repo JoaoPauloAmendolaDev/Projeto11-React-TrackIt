@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import GlobalStyle from "../assets/style/GlobalStyle";
-import Habits from "../Habits/Habits";
-import Login from "../Login/Login";
-import Subscribe from "./Subscribe";
-import AuthProvider from "../contexts/auth";
-import MyHabitsProvider from "../contexts/MyHabits";
+import GlobalStyle from "./assets/style/GlobalStyle";
+import Habits from "./Habits/Habits";
+import Login from "./Login/Login";
+import Subscribe from "./Subscribe/Subscribe";
+import AuthProvider from "./contexts/auth";
+import MyHabitsProvider from "./contexts/MyHabits";
+import Today from "./Today/Today";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
               <Route path="/" element={<Login />} />
               <Route path="/cadastro" element={<Subscribe />} />
               <Route path="/habitos" element={<Habits />} />
+              <Route path="/hoje" element={<Today />} />
             </Routes>
           </MyHabitsProvider>
         </AuthProvider>

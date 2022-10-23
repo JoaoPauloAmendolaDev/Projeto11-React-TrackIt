@@ -3,10 +3,10 @@ import { createContext, useState } from "react";
 export const MyHabitsContext = createContext({});
 
 function MyHabitsProvider({ children }) {
-  const [MyHabits, setMyHabits] = useState([]);
+  const [globalHabits, setGlobalHabits] = useState([]);
 
   return (
-    <MyHabitsContext.Provider value={{ MyHabits, setMyHabits }}>
+    <MyHabitsContext.Provider value={{ globalHabits, setGlobalHabits }}>
       {children}
     </MyHabitsContext.Provider>
   );
