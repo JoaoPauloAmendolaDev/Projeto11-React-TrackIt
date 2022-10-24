@@ -20,7 +20,8 @@ import dayjs from "dayjs";
 
 function Today() {
   const { object, setObject } = useContext(AuthContext);
-  const { globalHabits, setGlobalHabits } = useContext(MyHabitsContext);
+  const { globalHabits, setGlobalHabits, percent, setPercent } =
+    useContext(MyHabitsContext);
   const [selected, setSelected] = useState([]);
   const [habits, setHabits] = useState();
 
@@ -47,6 +48,8 @@ function Today() {
   }, [selected]);
 
   function sucess(e) {
+    let count = ((selected.length / globalHabits.length) * 100).toFixed(0);
+    setPercent(count);
     console.log(globalHabits);
     setGlobalHabits(e.data);
   }
@@ -97,9 +100,7 @@ function Today() {
           data-identifier="today-infos"
         >
           {selected.length > 0
-            ? `${((selected.length / globalHabits.length) * 100).toFixed(
-                0
-              )} % Hábitos concluidos hoje`
+            ? ` ${percent} % Hábitos concluidos hoje`
             : "NENHUM HÁBITO CONCLUIDO HOJE"}
         </SubText>
       </div>

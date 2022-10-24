@@ -1,7 +1,16 @@
 import { Navigate, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import {
+  CircularProgressbarWithChildren,
+  buildStyles,
+} from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
+import { MyHabitsContext } from "../../contexts/MyHabits";
+import { useContext } from "react";
 
 export default function Footer() {
+  const { globalHabits, setGlobalHabits, percent, setPercent } =
+    useContext(MyHabitsContext);
   const navigate = useNavigate();
   function goTo(text) {
     if (text === "habits") {
@@ -21,7 +30,18 @@ export default function Footer() {
         Hábitos
       </p>
       <span onClick={() => goTo("today")}>
-        <p>Hoje</p>
+        <CircularProgressbarWithChildren
+          value={percent}
+          text={"Hoje"}
+          background
+          backgroundPadding={6}
+          styles={buildStyles({
+            backgroundColor: "#52B6FF",
+            textColor: "#fff",
+            pathColor: "#fff",
+            trailColor: "transparent",
+          })}
+        />
       </span>
       <p
         data-identifier="historic-page-action"
